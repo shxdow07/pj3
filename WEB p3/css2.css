@@ -1,0 +1,128 @@
+main{
+    display: flex;
+    justify-content: center;
+    position:absolute;
+    width: 100%;
+}
+
+
+footer{
+    position: static;
+    width: 100%;
+    margin-top: 100%;
+}
+
+
+
+@media screen and (max-width:1000px){
+
+
+    .logo img{
+        left: 30px;
+    }
+
+    .header_tot{
+         margin-left: 150px;
+    }
+      
+    .menu li{
+        width: 80px;
+    }
+
+    .menu li.in3{
+        position: absolute;
+      float: right; 
+      right: 30%; 
+    }
+
+    .menu li.in2{
+      width: 160px;
+  }
+    .menu li.in4{
+      position: absolute;
+    float: right; 
+    right: 25%; 
+  }
+
+  footer{
+      margin-bottom: -80%;
+  }
+
+    
+}
+
+
+#perfil{
+  background-color: #000;
+  border-radius: 20px;
+  z-index: 100;
+  left: -75px;
+  width: 200px;
+
+  margin-top: 10px;
+  padding-top: 30px;
+  position: absolute;
+  
+  
+}
+
+.menu li ul {
+  display:none;
+  position:absolute;
+  min-width:140px;
+}
+
+.menu li:hover > ul {
+  display:block;
+  position: absolute;
+}
+
+.menu li ul li {
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.menu li ul li a{
+  position: relative;
+  font-family: Open Sans;
+  text-transform: uppercase;
+text-decoration: none;
+font-weight: 600;
+  font-size: 13px;
+color: white;
+  width: 100%;
+}
+.menu li ul li a:hover{
+  margin: 0;
+right: 0; 
+left: 0;
+background: rgba(247, 202, 24, 0.1);
+  border:#F7CA18;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 2px;
+    padding-left: 30%;
+    padding-right:  30%;
+  -webkit-transition: .25s linear;
+  -moz-transition: .25s linear;
+  transition: .25s linear;
+
+}
+
+.menu li ul li a.logout:hover{
+  margin: 0;
+right: 0; 
+left: 0;
+background: rgba(247, 202, 24, 0.1);
+  border:#F7CA18;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 2px;
+  padding-left: 20%;
+    padding-right:  20%;
+  -webkit-transition: .25s linear;
+  -moz-transition: .25s linear;
+  transition: .25s linear;
+
+}

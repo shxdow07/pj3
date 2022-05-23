@@ -1,0 +1,949 @@
+
+html{
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    min-height: 100%;
+    min-width: 100%;
+    margin: 0;
+}
+
+
+main{
+    position: absolute;
+}
+
+main a{
+    color: black;
+}
+
+header{
+    position: fixed;
+    top: 0;
+    margin: 0%;
+    height:117px;
+    padding: 0%;
+	border: black;
+	border-width: 2px;
+    z-index: 10;
+}
+.head_container{
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height:117px;
+    left: 0; 
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+}
+.logo img{
+	height: 60px;
+}
+.menu{
+	display: flex;
+	flex-direction: row;
+    align-items: center;
+    text-align: center;
+	margin-top:5px;
+    width: 100%;
+}
+.menu ul{
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+	list-style-type: none;
+	padding: 0;
+}
+
+.carrito{
+    position: relative;
+    float:right;
+    margin-right: 10%;
+}
+.header_tot{
+	position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: 20%;
+}
+.menu a{
+	position: relative;
+    font-family: Open Sans;
+    text-transform: uppercase;
+	text-decoration: none;
+	font-weight: 600;
+    font-size: 13px;
+	color: white;
+	    padding-left: 15px;
+	    padding-right: 15px;
+}
+.menu a:hover {
+	margin: 0;
+	right: 0; 
+	left: 0;
+	background: rgba(247, 202, 24, 0.1);
+    border:#F7CA18;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 2px;
+	padding:8px;
+	    padding-left: 13px;
+	    padding-right: 13.30px;
+		-webkit-transition: .25s linear;
+    -moz-transition: .25s linear;
+    transition: .25s linear;
+
+}
+
+.icon{
+	display: none;
+}
+
+menu.responsive{
+	position: relative;
+}
+menu.responsive{
+	float: none;
+    display: block;
+    text-align: left;
+}
+
+@media screen and (max-width: 835px) {
+	.logo img {
+	    height: 20px;
+	}
+	.menu{
+		margin:0;
+	}
+}
+
+
+@media screen and (max-width: 690px) {
+
+.menu a{
+    font-size: 5px;
+}
+
+.menu ul{
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+}
+
+.menu a:hover {
+	margin: 0;
+	right: 0; 
+	left: 0;
+	background: rgba(247, 202, 24, 0.1);
+    border:#F7CA18;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 2px;
+	padding:8px;
+	    padding-left: 13px;
+	    padding-right: 13.30px;
+		-webkit-transition: .25s linear;
+    -moz-transition: .25s linear;
+    transition: .25s linear;
+
+}
+.header_tot{
+    margin-left: 2px;
+}
+.icon{
+    font-weight: 900 !important;
+        font-size: 27px !important;
+    padding: 0;
+    margin: 0;
+       margin-top: -22px;
+    display: flex;
+}
+	.logo img {
+        float: left;
+	    height: 40px;
+	}
+}
+
+
+
+.sidenav {
+	height: 100%;
+    width: 0;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    transition: 0.2s;
+    box-shadow: 2px 8px 20px rgba(0, 0, 0, 0.24);
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #1c3664;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: #F7CA18;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+
+  #opcio1{
+      height: 50%;
+      position: absolute;
+      width: 18%;
+      border: solid 1px black;
+      border-radius: 20px;
+      background-image: url(https://i.pinimg.com/564x/ef/f6/64/eff6642a4e939908d4df9bfec2ef51d9--winter-sports-extreme-sports.jpg);
+      background-size: 100% 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: 0.4s ease;
+
+      left: 18%;
+      top: 20%;
+  }
+
+  #opcio1:hover{
+      height: 60%;
+      width: 22%;
+      left: 16%;
+      top: 15%;
+      z-index: 100;
+      box-shadow: 0 0 25px 10px black;
+  }
+  #opcio2{
+    height: 50%;
+    position: absolute;
+    width: 18%;
+    border: solid 1px black;
+    border-radius: 20px;
+    background-image: url(https://s1.1zoom.me/b6951/566/Winter_Skiing_Snow_Sun_561779_1080x1920.jpg);
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    transition: 0.4s ease;
+
+    justify-content: center;
+    flex-direction: column;
+    left: 40%;
+    top: 20%;
+}
+#opcio2:hover{
+    height: 60%;
+    width: 22%;
+    left: 38%;
+    top: 15%;
+    z-index: 100;
+    box-shadow: 0 0 25px 10px black;
+}
+#opcio3{
+    height: 50%;
+    position: absolute;
+    width: 18%;
+    border: solid 1px black;
+    transition: 0.4s ease;
+
+    border-radius: 20px;
+    background-image: url(https://cms.coppercolorado.com/sites/copper/files/2020-04/Copper%20Mountain%20Mobile%20Background%20-%20Resolution_1.jpg);
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    left: 62%;
+    top: 20%;
+}
+#opcio3:hover{
+    height: 60%;
+    width: 22%;
+    left: 60%;
+    z-index: 100;
+    top: 15%;
+        box-shadow: 0 0 25px 10px black;
+
+}
+.titol1{
+    position: absolute;
+    top: 20px;
+    width: 80%;
+    height: 12%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    border: solid 1px black;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 7px 13px 37px #000;
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+}
+.contingut{
+    position: absolute;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Open Sans;
+    width: 80%;
+    height: 50%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+    box-shadow: 7px 13px 37px #000;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+}
+
+.contingut span{
+    padding: 15px;
+}
+  main{
+      position: absolute;
+      top: 117px;
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      height: 100%;
+      width: 100%;
+  }
+.boton{
+    position: absolute;
+    width: 80%;
+    bottom: 30px;
+}
+  .boto {
+      margin-top: 20px;
+    width: 100%;
+    height: 40px;
+    background: #017bab;
+    border: none;
+    color: white;
+    border-radius: 5px;
+  }
+
+  .boto:hover{
+      background: green;
+      box-shadow: 7px 13px 37px #000;
+  }
+
+
+
+
+
+
+
+
+
+  
+@media screen and (max-width: 835px) {
+	.logo img {
+	    height: 20px;
+	}
+	.menu{
+		margin:0;
+	}
+}
+
+
+@media screen and (max-width:1000px){
+    .contingut{
+        display: inline-block;
+        overflow: hidden;
+    }
+
+      .logo img{
+          left: 30px;
+      }
+
+      .header_tot{
+           margin-left: 150px;
+      }
+        
+      .menu li{
+          width: 80px;
+      }
+
+      .menu li.in3{
+          position: absolute;
+        float: right; 
+        right: 30%; 
+      }
+
+      .menu li.in2{
+        width: 160px;
+    }
+      .menu li.in4{
+        position: absolute;
+      float: right; 
+      right: 25%; 
+    }
+
+    .parent{
+        margin-top: 0px;
+        height: 95%;
+    }
+
+    #opcio1{
+        height: 50%;
+        position: absolute;
+        width: 30%;
+        border: solid 1px black;
+        border-radius: 20px;
+        background-image: url(https://i.pinimg.com/564x/ef/f6/64/eff6642a4e939908d4df9bfec2ef51d9--winter-sports-extreme-sports.jpg);
+        background-size: 100% 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        
+        left: 2%;
+        top: 20%;
+    }
+  
+    #opcio1:hover{
+        height: 60%;
+        width: 40%;
+        left: 5%;
+        top: 15%;
+        z-index: 100;
+        box-shadow: 0 0 25px 10px black;
+    }
+    #opcio2{
+      height: 50%;
+      position: absolute;
+      width: 30%;
+      border: solid 1px black;
+      border-radius: 20px;
+      background-image: url(https://s1.1zoom.me/b6951/566/Winter_Skiing_Snow_Sun_561779_1080x1920.jpg);
+      background-size: 100% 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      left: 35%;
+      top: 20%;
+  }
+  #opcio2:hover{
+      height: 60%;
+      width: 40%;
+      left: 30%;
+      top: 15%;
+      z-index: 100;
+      box-shadow: 0 0 25px 10px black;
+  }
+  #opcio3{
+      height: 50%;
+      position: absolute;
+      width: 30%;
+      border: solid 1px black;
+      border-radius: 20px;
+      background-image: url(https://cms.coppercolorado.com/sites/copper/files/2020-04/Copper%20Mountain%20Mobile%20Background%20-%20Resolution_1.jpg);
+      background-size: 100% 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      left: 68%;
+      top: 20%;
+  }
+  #opcio3:hover{
+      height: 60%;
+      width: 40%;
+      left: 55%;
+      z-index: 100;
+      top: 15%;
+          box-shadow: 0 0 25px 10px black;
+  
+  }
+
+      
+}
+
+
+#dades2{
+    right: -1000px;
+    opacity: 1;
+    top: 117px;
+    position: fixed;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0px 25px 40px #1687d933;
+}
+#titoldades2{
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 30px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+
+#productes_carr2{
+    top: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-wrap: wrap;   
+}
+
+.productes_carr2 .cart-item-marca{
+    width: 25%;
+}
+
+.productes_carr2 .cart-item-model{
+    width: 35%;
+}
+
+.productes_carr2  .cart-column{
+    width: 65%;
+}
+.productes_carr2  .productes_carro{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+}
+.productes_carr2  .cart-quantity{
+    width: 25%;
+}
+.productes_carr2  .cart-quantity-input{
+    width: 30%;
+    height: 20%;
+}
+
+.productes_carr  .cart-quantity-input{
+    height: 20px;
+}
+.productes_carr2 .cart-preu{
+    text-align: center;
+    width: 10%;
+}
+.productes_carr2  .cart-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0;
+    text-align: center;
+}
+.productes_carr2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+.productes_carr2 .cart-item-image{
+    border: solid 1px black;
+    border-radius: 10px;
+}
+
+.productes_carr2 .eliminar{
+    cursor: pointer;
+    text-align: end;
+    margin-bottom: 5px;
+    width: 170px;
+    background-color: white;
+}
+
+
+.productes_carr2 .quantitat{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.productes_carr2  .unitats{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 170px;
+}
+
+
+
+#titoldades2 span {
+    text-align: center;
+    width: 16%;
+    font-size: 15px;
+}
+#productes_carr2 input{
+    color: black;
+}
+#dades2 #buidarcarrito2{
+    width: 40%;
+    color: whitesmoke;
+    padding: 7px;
+    border-radius: 15px;
+    background-color: black;
+}
+
+.buidar2{
+    margin-right: 5.6%;
+    margin-top: 2%;
+    display: flex;
+    justify-content: end;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 2%;
+}
+hr.dos {
+    display: flex;
+    margin-top: 35px;
+    width: 70%;
+    margin-left: 25%;
+   }
+
+.cart-total2{
+    margin-top: 10px;
+    margin-right: 5.6%;
+    display: flex;
+    height: 35px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: end;
+}
+
+.cart-total-price2{
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: -25%;
+}
+.cart-total-title2{
+    position: relative;
+    font-size: 15px;
+}
+
+.preu2{
+    height: 35px;
+    display: flex;
+    justify-content: end;
+    text-align: center;
+    align-items: center;
+    width: 15%;
+}
+.totalunitats2{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.cart-total .unitats2{
+    height: 100%;
+    font-size: 20px;
+    color: grey;
+}
+
+.cart-total2 .unitats2{
+    height: 100%;
+    font-size: 15px;
+    color: grey;
+}
+/* 
+.btn-danger{
+    position: absolute;
+    background-color: white;
+    border: none;
+    margin-left: 15%;
+    padding: 2px;
+}
+
+.btn-danger:hover{
+    border: solid 2px black;
+    border-radius: 25px;
+    background-color: black;
+} */
+
+.btn-danger {
+    margin-left: 15%;
+    border: 0;
+    padding: 0;
+    background: #0066ff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 150ms;
+  }
+  .btn-danger .icon-cross {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    position: relative;
+    width: 20px;
+    height: 20px;
+  }
+  .btn-danger .icon-cross:before, .btn-danger .icon-cross:after {
+    content: "";
+    position: absolute;
+    top: 7.2px;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: #fff;
+    border-radius: 6px;
+  }
+  .btn-danger .icon-cross:before {
+    transform: rotate(45deg);
+  }
+  .btn-danger .icon-cross:after {
+    transform: rotate(-45deg);
+  }
+  .btn-danger .icon-cross span {
+    display: block;
+  }
+  .btn-danger:hover, .btn-danger:focus {
+    transform: rotateZ(90deg);
+    background: red;
+    
+  }
+
+ 
+#login{
+    right: -1000px;
+    opacity: 1;
+    top: 117px;
+    position: fixed;
+    z-index: 100;
+}
+.form-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 280px;
+    height: 280px;
+    background: #4e4d4d;
+    border-radius: 8px;
+    margin: auto;
+    box-shadow: 7px 13px 37px #000;
+    padding: 20px 30px;
+    border-top: 4px solid #017bab;
+    color: white;
+  }
+  .form-login h5 {
+    margin: 0;
+    text-align: center;
+    height: 40px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid;
+    font-size: 20px;
+  }
+input::placeholder{
+    padding-left: 10px;
+  }
+  .controls {
+    width: 100%;
+    border: 1px solid #017bab;
+    margin-bottom: 15px;
+    height: 40px;
+    background: #252323;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .controls2 {
+    width: 100%;
+    border: 1px solid #017bab;
+    margin-bottom: 15px;
+    height: 40px;
+    background: #252323;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .buttons {
+    width: 100%;
+    height: 40px;
+    background: #017bab;
+    border: none;
+    color: white;
+    margin-bottom: 16px;
+    border-radius: 5px;
+  }
+  .buttons:hover{
+    background: green;
+    cursor: pointer;
+  }
+  .form-login p{
+    height: 40px;
+    text-align: center;
+    border-bottom: 1px solid;
+  }
+  
+  .form-login a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .form-login a:hover {
+    text-decoration: underline;
+  }
+
+  
+
+.footer{
+    background:#000;
+    padding:30px 0px;
+    font-family: 'Play', sans-serif;
+    text-align:center;
+    }
+    
+    .footer .row{
+    width:100%;
+    margin:1% 0%;
+    padding:0.6% 0%;
+    color:gray;
+    font-size:0.8em;
+    }
+    
+    .footer .row a{
+    text-decoration:none;
+    color:gray;
+    transition:0.5s;
+    }
+    
+    .footer .row a:hover{
+    color:#fff;
+    }
+    
+    .footer .row ul{
+    width:100%;
+    }
+    
+    .footer .row ul li{
+    display:inline-block;
+    margin:0px 30px;
+    }
+    
+    .footer .row a i{
+    font-size:2em;
+    margin:0% 1%;
+    }
+    
+    @media (max-width:720px){
+    .footer{
+    text-align:left;
+    padding:5%;
+    }
+
+    footer{
+        margin-top: 650%;
+    }
+
+    .footer .row ul li{
+    display:block;
+    margin:10px 0px;
+    text-align:left;
+    }
+    .footer .row a i{
+    margin:0% 3%;
+    }
+    }
+
+
+  @media screen and (max-width:1000px){
+
+
+      .logo img{
+          left: 30px;
+      }
+
+      .header_tot{
+           margin-left: 150px;
+      }
+        
+      .menu li{
+          width: 80px;
+      }
+
+      .menu li.in3{
+          position: absolute;
+        float: right; 
+        right: 30%; 
+      }
+
+      .menu li.in2{
+        width: 160px;
+    }
+      .menu li.in4{
+        position: absolute;
+      float: right; 
+      right: 25%; 
+    }
+
+    footer{
+        margin-top: 150%;
+    }
+
+      
+}
+
+.in{
+    width: 4%;
+}
+
+.in2{
+    width: 10%;
+}
+
+.in3{
+    position: absolute;
+    float: right; 
+    right: 35%; 
+}
+
+.in4{
+    position: absolute; 
+    float: right; 
+    right: 30%; 
+    width: 5%;
+}
