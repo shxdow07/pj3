@@ -1,3 +1,18 @@
+<?php
+include "config.php";
+
+if(isset($_SESSION['usuari'])){
+    $user = "fas fa-skiing-nordic";
+    $user2 ="Logged In";
+
+        
+}else{
+    $user = "fa-solid fa-user";
+    $user2 ="";
+}
+  
+
+?>
 <div class="head_container">
             <div class="header_tot">
                 <div class="logo">
@@ -10,7 +25,7 @@
                         <li class="in2"><a href="index.php#productes">Productes</a></li>
                         <li class="in2"><a href="index.php#sobrenos">Sobre Nosaltres</a></li>
                         <li class="in2"><a href="temps.php">Temps Comarques</a></li>
-                        <li  class="in3" ><a onmouseover="mostrar2()" onmouseout="amagar2()" href="#"><i class="fa-solid fa-user"></i></a>
+                        <li  class="in3" ><a onmouseover="mostrar2()" onmouseout="amagar2()" href="#"><i class="<?=$user?>"></i> <?=$user2?></a>
                             <ul id="perfil">
                                 <li><a href="cuenta.php">COMPTE</a></li>
                                 <li><a href="cursos.php">CURSOS</a></li>
@@ -23,3 +38,5 @@
                 </div>
             </div>
         </div>
+
+        
