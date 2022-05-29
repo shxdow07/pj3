@@ -2,6 +2,7 @@ package prj3;
 
 import java.sql.Connection ;
 import java.sql.DriverManager ;
+import java.sql.PreparedStatement;
 import java.sql.SQLException ;
 import java.sql.Statement ;
 import java.sql.ResultSet ;
@@ -9,25 +10,22 @@ import java.util.List ;
 import java.util.ArrayList ;
 public class Connexio {
 
-    private Connection connection ;
+    private static Connection con;
+
+    public Connexio() throws SQLException{
+        
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/esqui","root", "");
+    }
     
+    public static Connection connectarBD(){
+        return con;
+    }
    
-
-    public Connexio(String driverClassName, String dbURL, String user, String password) throws SQLException, ClassNotFoundException {
-        Class.forName(driverClassName);
-        connection = DriverManager.getConnection(dbURL, user, password);
-    }
-
-    public void shutdown() throws SQLException {
-        if (connection != null) {
-            connection.close();
-        }
-    }
 
     public List<Client> getPersonList() throws SQLException {
         try (
-            Statement stmnt = connection.createStatement();
-            ResultSet rs = stmnt.executeQuery("select * from client");
+            Statement stmnt = con.createStatement();
+            ResultSet rs = stmnt.executeQuery("select client.*, client_colectiu.num_familiar,client_federat.num_federacio from client left join client_colectiu on client.dni_usuari = client_colectiu.dni_usuari left join client_federat on client.dni_usuari = client_federat.dni_usuari; ");
         ){
             List<Client> personList = new ArrayList<>();
             while (rs.next()) {
@@ -35,7 +33,8 @@ public class Connexio {
                 String nom = rs.getString("nom");
                 String cognom = rs.getString("cognom");
                 String cognom2 = rs.getString("cognom2");
-                Client person = new Client(dni, nom, cognom, cognom2);
+                String familianum = rs.getString("num_familiar");
+                Client person = new Client(dni, nom, cognom, cognom2, familianum);
                 personList.add(person);
             }
             return personList ;
@@ -44,15 +43,16 @@ public class Connexio {
     
     public List<CursColectiu> getCursColList() throws SQLException {
         try (
-            Statement stmnt = connection.createStatement();
+            Statement stmnt = con.createStatement();
             ResultSet rs = stmnt.executeQuery("select * from curs c, curs_colectiu cc WHERE c.id_Curs=cc.id_Curs");
         ){
             List<CursColectiu> curscolList = new ArrayList<>();
             while (rs.next()) {
                 int idcurs = rs.getInt("id_curs");
                 String nom = rs.getString("Nom");
-                int preuhora = rs.getInt("Preu_hora");
-                CursColectiu curscol = new CursColectiu(idcurs, nom, preuhora);
+                int preuhora = rs.getInt("preu");
+                int aforament = rs.getInt("aforament");
+                CursColectiu curscol = new CursColectiu(idcurs, nom, preuhora, aforament);
                 curscolList.add(curscol);
             }
             return curscolList ;
@@ -61,7 +61,7 @@ public class Connexio {
     
     public List<CursCompeticio> getCursComList() throws SQLException {
         try (
-            Statement stmnt = connection.createStatement();
+            Statement stmnt = con.createStatement();
             ResultSet rs = stmnt.executeQuery("select * from curs C, curs_competitiu cco WHERE c.id_curs=cco.id_curs");
         ){
             List<CursCompeticio> curscomList = new ArrayList<>();
@@ -79,7 +79,7 @@ public class Connexio {
     
     public List<CursIndividual> getCursIndList() throws SQLException {
         try (
-            Statement stmnt = connection.createStatement();
+            Statement stmnt = con.createStatement();
             ResultSet rs = stmnt.executeQuery("select * from curs C, curs_individual ci WHERE c.id_curs=ci.id_curs");
         ){
             List<CursIndividual> curscomList = new ArrayList<>();
@@ -93,6 +93,9 @@ public class Connexio {
             return curscomList ;
         } 
     }
+
+  
+   
 
 
     

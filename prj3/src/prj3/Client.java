@@ -9,13 +9,14 @@ public class Client {
     private String nom;
     private String cognom;
     private String cognom2;
+    private String familianum;
 
     
     public Client(){
         idClient++;
     }
     
-    public Client (String dni, String nom, String cognom, String cognom2){
+    public Client (String dni, String nom, String cognom, String cognom2, String familianum){
         idClient++;
         
         this.idClient = idClient;
@@ -23,6 +24,7 @@ public class Client {
         this.nom = nom;
         this.cognom = cognom;
         this.cognom2 = cognom2;
+        this.familianum = familianum;
 
     }
 
@@ -44,6 +46,16 @@ public class Client {
     public String getCognom2() {
         return cognom2;
     }
+
+    public String getFamilianum() {
+        return familianum;
+    }
+
+    public void setFamilianum(String familianum) {
+        this.familianum = familianum;
+    }
+    
+    
   
     
 }

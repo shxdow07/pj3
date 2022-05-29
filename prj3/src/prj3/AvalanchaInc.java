@@ -1,5 +1,14 @@
 package prj3;
-
+import javafx.scene.control.TableView;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -39,9 +48,27 @@ public class AvalanchaInc extends Application{
     TextField txtCliCognom2;
     TextField txtCliCursID;
     TextField txtCliCursNom;
-    TextField txtCliCursPreu;
-    TextField txtCliCursNivell;
+    Label lblfamilianum = new Label ("Aforament");
+    TextField txtfamilianum = new TextField();
+    Label lblAfor = new Label ("Aforament");
+    TextField txtCliCursAfor = new TextField();
+    Label lblNivell = new Label ("Nivell");
+    TextField txtCliCursNivell = new TextField();
+    Label lblPreu = new Label ("Preu");
+    TextField txtCliCursPreu = new TextField();
+    Label lblPreu2 = new Label ("Preu");
+    TextField txtCliCursPreu2 = new TextField();
+    Label lblpreuh = new Label ("Preu Hora");
+    TextField txtCliCursPreuh = new TextField();
     
+    Label lblhores = new Label ("Hores");
+    TextField txtCliCurshores = new TextField("1");
+    int i = 0;
+    int i3;
+    int i4;
+    int i5;
+    int i6;
+    int i7;
      public static void main (String[] args){
         launch();
     }
@@ -51,7 +78,7 @@ public class AvalanchaInc extends Application{
     public void start(Stage escenari) throws Exception {
         
         escenari.getIcons().add(new Image("https://img.icons8.com/external-photo3ideastudio-lineal-color-photo3ideastudio/344/external-avalanche-natural-disaster-photo3ideastudio-lineal-color-photo3ideastudio.png"));
-        
+
         escenari.setTitle("AVALANCHA INC");
         BorderPane bp = new BorderPane();
        
@@ -123,17 +150,39 @@ public class AvalanchaInc extends Application{
         lblCursNom.setTranslateY(50);
         lblCursNom.setEffect(shadow);
         
-        Label lblPreu = new Label ("Preu hora");
+        
         lblPreu.setTextFill(Color.web("#ffffff"));
         lblPreu.setTranslateY(60);
         lblPreu.setEffect(shadow);
         
-        Label lblNivell = new Label ("Nivell");
+        
+        
         lblNivell.setTextFill(Color.web("#ffffff"));
         lblNivell.setTranslateY(70);
         lblNivell.setEffect(shadow);
-       
+        lblNivell.setVisible(false);
         
+        
+        lblAfor.setTextFill(Color.web("#ffffff"));
+        lblAfor.setTranslateY(10);
+        lblAfor.setEffect(shadow);
+        lblAfor.setVisible(false);
+        
+        lblpreuh.setTextFill(Color.web("#ffffff"));
+        lblpreuh.setTranslateY(25);
+        lblpreuh.setEffect(shadow);
+        lblpreuh.setVisible(false);
+        
+       lblhores.setTextFill(Color.web("#ffffff"));
+        lblhores.setTranslateY(35);
+        lblhores.setEffect(shadow);
+        lblhores.setVisible(false);
+        
+        lblPreu2.setTextFill(Color.web("#ffffff"));
+        lblPreu2.setTranslateY(-30);
+        lblPreu2.setEffect(shadow);
+        lblPreu2.setVisible(false);
+
         txtCliDni = new TextField();
         DropShadow shadow1 = new DropShadow();
         txtCliDni.setEffect(shadow1);
@@ -163,16 +212,36 @@ public class AvalanchaInc extends Application{
         DropShadow shadow6 = new DropShadow();
         txtCliCursNom.setEffect(shadow6);
         
-        txtCliCursPreu = new TextField();
         txtCliCursPreu.setTranslateY(60);
         DropShadow shadow7 = new DropShadow();
         txtCliCursPreu.setEffect(shadow7);
         
-        txtCliCursNivell = new TextField();
+       
+        
         txtCliCursNivell.setTranslateY(70);
         DropShadow shadow8 = new DropShadow();
         txtCliCursNivell.setEffect(shadow8);
+        txtCliCursNivell.setVisible(false);
         
+         txtCliCursAfor.setTranslateY(10);
+        DropShadow shadow9 = new DropShadow();
+        txtCliCursAfor.setEffect(shadow9);
+        txtCliCursAfor.setVisible(false);
+        
+         txtCliCursPreuh.setTranslateY(25);
+        DropShadow shadow10 = new DropShadow();
+        txtCliCursPreuh.setEffect(shadow10);
+        txtCliCursPreuh.setVisible(false);
+        
+         txtCliCurshores.setTranslateY(35);
+        DropShadow shadow11 = new DropShadow();
+        txtCliCurshores.setEffect(shadow11);
+        txtCliCurshores.setVisible(false);
+        
+         txtCliCursPreu2.setTranslateY(-30);
+        DropShadow shadow12 = new DropShadow();
+        txtCliCursPreu2.setEffect(shadow12);
+        txtCliCursPreu2.setVisible(false);
         gp.setAlignment(Pos.CENTER);
         
         gp.add(lblDni, 0, 0);
@@ -191,30 +260,38 @@ public class AvalanchaInc extends Application{
         gp.add(txtCliCursPreu, 1, 6);
         gp.add(lblNivell, 0, 7);
         gp.add(txtCliCursNivell, 1, 7);
-       
+        gp.add(lblAfor, 0, 8);
+        gp.add(txtCliCursAfor, 1, 8);
+        gp.add(lblpreuh, 0, 9);
+        gp.add(txtCliCursPreuh, 1, 9);
+        gp.add(lblhores, 0, 10);
+        gp.add(txtCliCurshores, 1, 10);
+        gp.add(lblPreu2, 0, 11);
+        gp.add(txtCliCursPreu2, 1, 11);
         return gp;
         
     }
     
     private Pane partSuperior(){
         HBox hb = new HBox();
-        Label lblEsky = new Label("AVALANCHA INC");
-        lblEsky.setFont(new Font(80));
-        lblEsky.setTextFill(Color.web("#ffffff"));
+        Label lblAvalancha = new Label("AVALANCHA INC");
+        lblAvalancha.setFont(new Font(80));
+        lblAvalancha.setTextFill(Color.web("#ffffff"));
         DropShadow shadow = new DropShadow();
-        lblEsky.setEffect(shadow);
+        lblAvalancha.setEffect(shadow);
         hb.setAlignment(Pos.CENTER);
         ImageView logo = new ImageView ("https://img.icons8.com/external-filled-outline-lima-studio/344/external-avalanche-winter-filled-outline-lima-studio.png");
         logo.setFitHeight(100);
         logo.setFitWidth(100);
         
         
-        hb.getChildren().addAll(lblEsky,logo);
+        hb.getChildren().addAll(lblAvalancha,logo);
         return hb;
         
     }
     
-    private Pane partInferior(){
+    private Pane partInferior() throws SQLException, ClassNotFoundException{
+        
         Button btn1 = new Button("Eliminar");
         btn1.setTextFill(Color.web("#ffffff"));
         btn1.setTranslateX(-10);
@@ -238,7 +315,11 @@ public class AvalanchaInc extends Application{
             txtCliCursID.clear();
             txtCliCursNom.clear();
             txtCliCursPreu.clear();
+             txtCliCursPreu2.clear();
             txtCliCursNivell.clear();
+            txtCliCursAfor.clear();
+            txtCliCursPreuh.clear();
+            txtCliCurshores.clear();
             
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
              alert.setHeaderText(null);
@@ -262,7 +343,18 @@ public class AvalanchaInc extends Application{
         transition2.setAutoReverse(true);
         transition2.setCycleCount(2);
         transition2.play();
-        btn2.setOnAction(e -> llogar_curs());
+        btn2.setOnAction((ActionEvent event) -> {
+            try {
+                
+                llogar_curs();
+            } catch (SQLException ex) {
+               Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("El client ja està inscrit a la cursa");
+            alert.showAndWait();
+            }
+        });
                 
         
         Button btn3 = new Button("Tancar");
@@ -294,7 +386,7 @@ public class AvalanchaInc extends Application{
         
     }
     
-    private void llogar_curs(){
+    private boolean llogar_curs() throws SQLException{
         
         if (txtCliDni.getText().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -308,18 +400,136 @@ public class AvalanchaInc extends Application{
             alert.setTitle("Error");
             alert.setContentText("Selecciona un Curs");
             alert.showAndWait();
-        }else {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        }
+      
+        
+        if(!txtCliCursAfor.getText().isEmpty() && txtCliCursNivell.getText().isEmpty()){
+
+            Connection con = new Connexio().connectarBD();
+            Statement stmt = con.createStatement();
+            stmt.execute("SET FOREIGN_KEY_CHECKS=0");
+            stmt.close();
+            PreparedStatement sql = con.prepareStatement("insert into lloguercurs_colectiu "
+                    + "(id_curs, dni_usuari, data_lloguer, preu, max_clients) "
+                    + "values "
+                    + "(?, ?, ?, ?, ?);");
+            sql.setString(1, txtCliCursID.getText());
+            sql.setString(2, txtCliDni.getText());
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            sql.setString(3, dateFormat.format(date));
+            sql.setString(4, txtCliCursPreu2.getText());
+            sql.setString(5, txtCliCursAfor.getText());
+
+             if (sql.executeUpdate() != 0) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
              alert.setHeaderText(null);
              alert.setTitle("Info");
              alert.setContentText("S'ha llogat un curs amb Èxit");
              alert.showAndWait();
-        } 
+             txtCliDni.clear();
+             txtClientNom.clear();
+            txtCliCognom.clear();
+            txtCliCognom2.clear();
+            txtCliCursID.clear();
+            txtCliCursNom.clear();
+            txtCliCursPreu.clear();
+            txtCliCursPreu2.clear();
+            txtCliCursNivell.clear();
+            txtCliCursAfor.clear();
+                 System.out.println("Insertat");
+            }
+            Statement stmt2 = con.createStatement();
+            stmt2.execute("SET FOREIGN_KEY_CHECKS=1");
+            stmt2.close();
             
+        }else if(!txtCliCursNivell.getText().isEmpty() && txtCliCursAfor.getText().isEmpty()){
+
+            Connection con = new Connexio().connectarBD();
+            Statement stmt2 = con.createStatement();
+            stmt2.execute("SET FOREIGN_KEY_CHECKS=0");
+            stmt2.close();
+            PreparedStatement sql2 = con.prepareStatement("insert into lloguercurs_competitiu "
+                    + "(id_curs, dni_usuari, data_lloguer, preu, nivell) "
+                    + "values "
+                    + "(?, ?, ?, ?, ?);");
+            sql2.setString(1, txtCliCursID.getText());
+            sql2.setString(2, txtCliDni.getText());
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            sql2.setString(3, dateFormat.format(date));
+            sql2.setString(4, txtCliCursPreu.getText());
+            sql2.setString(5, txtCliCursNivell.getText());
+
+           if (sql2.executeUpdate() != 0) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+             alert.setHeaderText(null);
+             alert.setTitle("Info");
+             alert.setContentText("S'ha llogat un curs amb Èxit");
+             alert.showAndWait();
+             txtCliDni.clear();
+             txtClientNom.clear();
+            txtCliCognom.clear();
+            txtCliCognom2.clear();
+            txtCliCursID.clear();
+            txtCliCursNom.clear();
+            txtCliCursPreu.clear();
+            txtCliCursPreu2.clear();
+            txtCliCursNivell.clear();
+            txtCliCursAfor.clear();
+            }
+            Statement stmt3 = con.createStatement();
+            stmt3.execute("SET FOREIGN_KEY_CHECKS=1");
+            stmt3.close();
+            
+        }else if(txtCliCursNivell.getText().isEmpty() && txtCliCursAfor.getText().isEmpty()){
+
+            Connection con = new Connexio().connectarBD();
+            Statement stmt2 = con.createStatement();
+            stmt2.execute("SET FOREIGN_KEY_CHECKS=0");
+            stmt2.close();
+            PreparedStatement sql3 = con.prepareStatement("insert into lloguercurs_individual "
+                    + "(id_curs, dni_usuari, data_lloguer, preu) "
+                    + "values "
+                    + "(?, ?, ?, ?);");
+            sql3.setString(1, txtCliCursID.getText());
+            sql3.setString(2, txtCliDni.getText());
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            sql3.setString(3, dateFormat.format(date));
+            sql3.setString(4, txtCliCursPreu.getText());
+            if (sql3.executeUpdate() != 0) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+             alert.setHeaderText(null);
+             alert.setTitle("Info");
+             alert.setContentText("S'ha llogat un curs amb Èxit");
+             alert.showAndWait();
+             txtCliDni.clear();
+             txtClientNom.clear();
+            txtCliCognom.clear();
+            txtCliCognom2.clear();
+            txtCliCursID.clear();
+            txtCliCursNom.clear();
+            txtCliCursPreu.clear();
+            txtCliCursPreu2.clear();
+            txtCliCursNivell.clear();
+            txtCliCursAfor.clear();
+            txtCliCursPreuh.clear();
+            txtCliCurshores.clear();
+            }
+            Statement stmt3 = con.createStatement();
+            stmt3.execute("SET FOREIGN_KEY_CHECKS=1");
+            stmt3.close();
+            
+        }
+        return false;
+
     }
     
     private Pane partDreta() throws Exception{
+        
         VBox vb = new VBox();
+        
         Label lblDreta = new Label("CURSOS");
         lblDreta.setFont(new Font(50));
         lblDreta.setTextFill(Color.web("#ffffff"));
@@ -334,7 +544,6 @@ public class AvalanchaInc extends Application{
         tp.getTabs().add(tab1);
         tp.getTabs().add(tab2);
         tp.getTabs().add(tab3);
-        
         ImageView logo3 = new ImageView ("https://img.icons8.com/wired/344/courses.png");
         logo3.setFitHeight(80);
         logo3.setFitWidth(80);
@@ -346,52 +555,86 @@ public class AvalanchaInc extends Application{
     }
     
     private Pane cursosColectius() throws Exception{
-        Connexio con = new Connexio("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/esqui", "root", "");
-        
+        Connexio con = new Connexio();
         VBox vb = new VBox();
         TableView<CursColectiu> tblCursos = new TableView<>();
         TableColumn<CursColectiu, String> colID = new TableColumn<>("ID");
         TableColumn<CursColectiu, String> colNom = new TableColumn<>("Nom");
-        TableColumn<CursColectiu, String> colPreu = new TableColumn<>("Preu hora");
+        TableColumn<CursColectiu, String> colPreu = new TableColumn<>("Preu");
+        TableColumn<CursColectiu, String> colAfor = new TableColumn<>("Aforament");
         
         colID.setCellValueFactory(new PropertyValueFactory<>("ID"));
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        colPreu.setCellValueFactory(new PropertyValueFactory<>("preu_hora")); 
+        colPreu.setCellValueFactory(new PropertyValueFactory<>("preu_hora"));
+        colAfor.setCellValueFactory(new PropertyValueFactory<>("Aforament")); 
 
-        tblCursos.getColumns().addAll(colID,colNom,colPreu);
-        
+        tblCursos.getColumns().addAll(colID,colNom,colPreu,colAfor);
         
         tblCursos.getItems().addAll(con.getCursColList());
-        
-        
 
         
        vb.getChildren().add(tblCursos);
        
        tblCursos.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
            @Override
-            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+            public void  changed(ObservableValue observable, Object oldValue, Object newValue) {
                 CursColectiu curs = (CursColectiu) newValue;
-                
+                System.out.println(curs);
                 if (curs != null){
+                    i6=curs.getPreu_hora();
+                    txtCliCursNivell.clear();
+                    lblNivell.setVisible(false);
+                    txtCliCursNivell.setVisible(false);
+                    lblAfor.setVisible(true);
+                    txtCliCursAfor.setVisible(true);
+                    lblpreuh.setVisible(false);
+                    txtCliCursPreuh.setVisible(false);
+                    lblPreu.setVisible(false);
+                    txtCliCursPreu.setVisible(false);
+                    lblPreu2.setVisible(true);
+                    txtCliCursPreu2.setVisible(true);
+                    lblhores.setVisible(false);
+                    txtCliCurshores.setVisible(false);
+                    txtCliCursID.clear();
+                    txtCliCursNom.clear();
+                    txtCliCursPreu.clear();
+                    txtCliCursNivell.clear();
                     txtCliCursID.setText(Integer.toString(curs.getID()));
                     txtCliCursNom.setText(curs.getNom());
-                    txtCliCursPreu.setText(Integer.toString(curs.getPreu_hora()));
+                    txtCliCursPreu2.setText(Integer.toString(curs.getPreu_hora()));
+                    txtCliCursAfor.setText(Integer.toString(curs.getAforament()));
+                    
+                            
                 }
                 
             }
         });
+       
+txtfamilianum.textProperty().addListener((observable, oldValue, newValue) -> {
+            
+            int i = Integer.parseInt(txtCliCursPreu2.getText());
+            System.out.println(newValue);
+            if(newValue==null){
+                
+                txtCliCursPreu2.setText(Integer.toString(i6));
+            }else{
+                i5=40;
+                txtCliCursPreu2.setText(Integer.toString(i -((i*i5)/100)));
+            }
+            
+        });
         return vb;
     }
     
+    
     private Pane cursosCompeticio()throws Exception{
-        Connexio con = new Connexio("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/esqui", "root", "");
+        Connexio con = new Connexio();
         
-        VBox vb = new VBox();
+        VBox vb2 = new VBox();
         TableView<CursCompeticio> tblCursos = new TableView<>();
         TableColumn<CursCompeticio, String> colID = new TableColumn<>("ID");
         TableColumn<CursCompeticio, String> colNom = new TableColumn<>("Nom");
-        TableColumn<CursCompeticio, String> colPreu = new TableColumn<>("Preu hora");
+        TableColumn<CursCompeticio, String> colPreu = new TableColumn<>("Preu");
         TableColumn<CursCompeticio, String> colNivell = new TableColumn<>("Nivell");
 
         colID.setCellValueFactory(new PropertyValueFactory<>("ID"));
@@ -399,7 +642,6 @@ public class AvalanchaInc extends Application{
         colPreu.setCellValueFactory(new PropertyValueFactory<>("preu_hora"));
         colNivell.setCellValueFactory(new PropertyValueFactory<>("nivell"));
 
-        
         tblCursos.getColumns().addAll(colID,colNom,colPreu,colNivell);
         
         tblCursos.getItems().addAll(con.getCursComList());
@@ -407,14 +649,30 @@ public class AvalanchaInc extends Application{
         
 
         
-       vb.getChildren().add(tblCursos);
-       
+       vb2.getChildren().add(tblCursos);
        tblCursos.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 CursCompeticio curs = (CursCompeticio) newValue;
                 
                 if (curs != null){
+                    txtCliCursAfor.clear();
+                    lblNivell.setVisible(true);
+                    txtCliCursNivell.setVisible(true);
+                    lblAfor.setVisible(false);
+                    txtCliCursAfor.setVisible(false);
+                    lblpreuh.setVisible(false);
+                    txtCliCursPreuh.setVisible(false);
+                    lblhores.setVisible(false);
+                    txtCliCurshores.setVisible(false);
+                    lblPreu.setVisible(true);
+                    txtCliCursPreu.setVisible(true);
+                    lblPreu2.setVisible(false);
+                    txtCliCursPreu2.setVisible(false);
+                    txtCliCursID.clear();
+                    txtCliCursNom.clear();
+                    txtCliCursPreu.clear();
+                    txtCliCursAfor.clear();
                     txtCliCursID.setText(Integer.toString(curs.getID()));
                     txtCliCursNom.setText(curs.getNom());
                     txtCliCursPreu.setText(Integer.toString(curs.getPreu_hora()));
@@ -424,13 +682,13 @@ public class AvalanchaInc extends Application{
                 
             }
         });
-        return vb;
+        return vb2;
     }
     
     private Pane cursosIndividuals() throws Exception{
-        Connexio con = new Connexio("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/esqui", "root", "");
+        Connexio con = new Connexio();
         
-        VBox vb = new VBox();
+        VBox vb3 = new VBox();
         TableView<CursIndividual> tblCursos = new TableView<>();
         TableColumn<CursIndividual, String> colID = new TableColumn<>("ID");
         TableColumn<CursIndividual, String> colNom = new TableColumn<>("Nom");
@@ -440,13 +698,11 @@ public class AvalanchaInc extends Application{
         colPreu.setCellValueFactory(new PropertyValueFactory<>("preu_hora"));
         
         tblCursos.getColumns().addAll(colID,colNom,colPreu);
-        
         tblCursos.getItems().addAll(con.getCursIndList());
         
         
-
-        
-       vb.getChildren().add(tblCursos);
+       int savedValue = Integer.parseInt(txtCliCurshores.getText());
+       vb3.getChildren().add(tblCursos);
        
        tblCursos.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
@@ -454,19 +710,64 @@ public class AvalanchaInc extends Application{
                 CursIndividual curs = (CursIndividual) newValue;
                 
                 if (curs != null){
+                    txtCliCursNivell.clear();
+                    txtCliCursAfor.clear();
+                    lblNivell.setVisible(false);
+                    txtCliCursNivell.setVisible(false);
+                    lblAfor.setVisible(false);
+                    txtCliCursAfor.setVisible(false);
+                    lblpreuh.setVisible(true);
+                    txtCliCursPreuh.setVisible(true);
+                    lblhores.setVisible(true);
+                    txtCliCurshores.setVisible(true);
+                    lblPreu.setVisible(true);
+                    txtCliCursPreu.setVisible(true);
+                    lblPreu2.setVisible(false);
+                    txtCliCursPreu2.setVisible(false);
+                    i7= curs.getPreu_hora();
                     txtCliCursID.setText(Integer.toString(curs.getID()));
                     txtCliCursNom.setText(curs.getNom());
                     txtCliCursPreu.setText(Integer.toString(curs.getPreu_hora()));
+                    txtCliCursPreuh.setText(Integer.toString(curs.getPreu_hora()));
                     
                 }
                 
             }
         });
-        return vb;
+ txtCliCurshores.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(txtCliCursPreuh.getText().isEmpty()){
+                
+            }else{
+            int i = Integer.parseInt(txtCliCursPreuh.getText());
+            
+            if(newValue.isEmpty()){
+                txtCliCursPreu.setText(Integer.toString(i7));
+                System.out.println("");
+            }else{
+            int i2 = Integer.parseInt(newValue);
+            if(i2==1){
+            i3=100;
+            }
+            else if(i2==2){
+            i3=20;
+            }else if(i2==3 || i2==4 || i2==5){
+             i3=30;
+            }else if(i2==6){
+             i3=50;
+            }else if(i2>6){
+             i2=6;
+             txtCliCurshores.setText("6");
+            }
+                System.out.println(i3);
+             int dis = (i*i2*i3)/100;
+            txtCliCursPreu.setText(Integer.toString(i*i2-dis));}
+        }});
+       
+        return vb3;
     }
     
     private Pane partEsquerra() throws Exception{
-        Connexio con = new Connexio("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/esqui", "root", "");
+        Connexio con = new Connexio();
         VBox vLateral = new VBox(); 
         Label lblClient = new Label ("CLIENT");
         lblClient.setFont(new Font(50));
@@ -483,12 +784,14 @@ public class AvalanchaInc extends Application{
         TableColumn<Client, String> colNom = new TableColumn<>("Nom");
         TableColumn<Client, String> colCognom = new TableColumn<>("Cognom");
         TableColumn<Client, String> colCognom2 = new TableColumn<>("Cognom2");
-        tblClients.getColumns().addAll(colDni,colNom,colCognom, colCognom2);
+        TableColumn<Client, String> colfamilianum2 = new TableColumn<>("FamiliaNum");
+        tblClients.getColumns().addAll(colDni,colNom,colCognom, colCognom2, colfamilianum2);
         
         colDni.setCellValueFactory(new PropertyValueFactory<>("dni"));
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         colCognom.setCellValueFactory(new PropertyValueFactory<>("cognom"));
         colCognom2.setCellValueFactory(new PropertyValueFactory<>("cognom2"));
+        colfamilianum2.setCellValueFactory(new PropertyValueFactory<>("familianum"));
         
 
         
@@ -512,6 +815,10 @@ public class AvalanchaInc extends Application{
                     txtCliDni.setText(client.getDni());
                     txtCliCognom.setText(client.getCognom());
                     txtCliCognom2.setText(client.getCognom2());
+                    if(client.getFamilianum()==null){
+                        
+                    }else{
+                    txtfamilianum.setText(client.getFamilianum());}
                 }
                 
             }
@@ -520,4 +827,7 @@ public class AvalanchaInc extends Application{
         
         return vLateral; 
     } 
+    
+    
 }
+
