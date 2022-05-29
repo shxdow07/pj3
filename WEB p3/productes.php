@@ -41,7 +41,7 @@ if (isset($_POST['login'])) {
     <title>AvalanchaINC</title>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="sala.css">
-    <script src="cursos2.js"></script>
+    <script src="sala.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -89,9 +89,9 @@ if(isset($_POST['logout'])){
  ?> 
     <div id="dades">
         <div id="titoldades">
-            <span class="cart-item cart-header cart-column">Descripcio</span>
+            <span class="cart-item cart-header cart-column">Item</span>
             <span class="cart-preu cart-header cart-column">Preu</span>
-            <span class="cart-quantity cart-header cart-column">Data</span>
+            <span class="cart-quantity cart-header cart-column">Unitats</span>
         </div>
     <div class="productes_carr" id="productes_carr">
     <?php 
@@ -102,14 +102,14 @@ if(isset($_POST['logout'])){
       $query_usuari = $link -> query ("SELECT dni_usuari from client WHERE usuari='$user'");
       $valores2 = mysqli_fetch_array($query_usuari);
       $dni_user = $valores2['dni_usuari'];
-      $query = $link -> query ("SELECT *, cu.nom as cursnom , m.nom as monitorm, m.cognom as cognomm FROM client c, curs cu, monitor m, lloguercurs_colectiu lc, lloguercurs_competitiu lco, lloguercurs_individual li WHERE c.dni_usuari='$dni_user'  AND li.dni_usuari=c.dni_usuari AND lco.dni_usuari=c.dni_usuari AND lc.dni_usuari=c.dni_usuari AND cu.dni_monitor=m.dni_monitor");
+      $query = $link -> query ("SELECT * FROM client c, lloguer_producte le, producte p WHERE c.dni_usuari='$dni_user' AND p.id_producte=le.id_producte AND le.dni_usuari=c.dni_usuari");
  
       $valores = mysqli_fetch_array($query);
       
     if($valores!=null){
-        $nomm = $valores['nom'];
-        $cognomm = $valores['cognom'];
-        $model = $valores['descripcio'];
+        $imatge = $valores['img'];
+        $marca = $valores['marca'];
+        $model = $valores['model'];
         $preu = $valores['preu'];
 //Aqui es on hem afegit el codi html dins php apart de mes variables creader
     foreach($query as $row){
@@ -117,12 +117,13 @@ if(isset($_POST['logout'])){
     ?>
     <div class="productes_carro3" id="<?=$num?>">
         <div class="cart-item cart-column">
-            <span class="cart-item-image" style="border:none;"> <?= $row['cursnom']?></span>
-            <span class="cart-item-model"><?=$row['descripcio']?></span>
+            <img class="cart-item-image" src="<?= $row['img']?>" width="80" height="80">
+            <span class="cart-item-marca"><?=$row['marca']?></span>
+            <span class="cart-item-model"><?=$row['model']?></span>
         </div>
         <span class="cart-preu cart-column"><?=$row['preu']?></span>
         <div class="cart-quantity cart-column">
-            <span id="cart-quantity-input" class="cart-quantity-input"><?=$row['data_inici']?></span>
+            <input id="cart-quantity-input" class="cart-quantity-input" type="number" value="1">
             
         </div>
     </div>
