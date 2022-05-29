@@ -2,11 +2,14 @@ package prj3;
 import javafx.scene.control.TableView;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
@@ -348,6 +351,7 @@ public class AvalanchaInc extends Application{
                 
                 llogar_curs();
             } catch (SQLException ex) {
+                
                Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Error");
@@ -407,6 +411,9 @@ public class AvalanchaInc extends Application{
 
             Connection con = new Connexio().connectarBD();
             Statement stmt = con.createStatement();
+            ResultSet rs3 = stmt.executeQuery("select * from client c, lloguercurs_colectiu cc WHERE c.dni_usuari=" + txtCliDni +"  AND cc.dni_usuari=c.dni_usuari AND cc.id_curs=" + txtCliCursID +" ");
+
+            if(rs3.next()==false){
             stmt.execute("SET FOREIGN_KEY_CHECKS=0");
             stmt.close();
             PreparedStatement sql = con.prepareStatement("insert into lloguercurs_colectiu "
@@ -439,14 +446,25 @@ public class AvalanchaInc extends Application{
             txtCliCursAfor.clear();
                  System.out.println("Insertat");
             }
+            }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("El client ja està inscrit a la cursa");
+            alert.showAndWait();
+            }
             Statement stmt2 = con.createStatement();
             stmt2.execute("SET FOREIGN_KEY_CHECKS=1");
             stmt2.close();
             
         }else if(!txtCliCursNivell.getText().isEmpty() && txtCliCursAfor.getText().isEmpty()){
-
             Connection con = new Connexio().connectarBD();
+
             Statement stmt2 = con.createStatement();
+            ResultSet rs = stmt2.executeQuery("select * from client c, lloguercurs_competitiu cc WHERE c.dni_usuari=" + txtCliDni +"  AND cc.dni_usuari=c.dni_usuari AND cc.id_curs=" + txtCliCursID +" ");
+            System.out.println(rs);
+            if(rs.next()==false){
+                
             stmt2.execute("SET FOREIGN_KEY_CHECKS=0");
             stmt2.close();
             PreparedStatement sql2 = con.prepareStatement("insert into lloguercurs_competitiu "
@@ -478,6 +496,13 @@ public class AvalanchaInc extends Application{
             txtCliCursNivell.clear();
             txtCliCursAfor.clear();
             }
+            }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("El client ja està inscrit a la cursa");
+            alert.showAndWait();
+            }
             Statement stmt3 = con.createStatement();
             stmt3.execute("SET FOREIGN_KEY_CHECKS=1");
             stmt3.close();
@@ -486,6 +511,9 @@ public class AvalanchaInc extends Application{
 
             Connection con = new Connexio().connectarBD();
             Statement stmt2 = con.createStatement();
+            ResultSet rs2 = stmt2.executeQuery("select * from client c, lloguercurs_individual cc WHERE c.dni_usuari=" + txtCliDni +"  AND cc.dni_usuari=c.dni_usuari AND cc.id_curs=" + txtCliCursID +" ");
+
+            if(rs2.next()==false){
             stmt2.execute("SET FOREIGN_KEY_CHECKS=0");
             stmt2.close();
             PreparedStatement sql3 = con.prepareStatement("insert into lloguercurs_individual "
@@ -516,6 +544,13 @@ public class AvalanchaInc extends Application{
             txtCliCursAfor.clear();
             txtCliCursPreuh.clear();
             txtCliCurshores.clear();
+            }
+            }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("El client ja està inscrit a la cursa");
+            alert.showAndWait();
             }
             Statement stmt3 = con.createStatement();
             stmt3.execute("SET FOREIGN_KEY_CHECKS=1");
