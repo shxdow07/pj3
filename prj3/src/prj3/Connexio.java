@@ -14,10 +14,10 @@ public class Connexio {
 
     public Connexio() throws SQLException{
         
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/esqui","root", "");
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3307/esqui","root", "");
     }
     
-    public static Connection connectarBD(){
+    public Connection connectarBD(){
         return con;
     }
    
@@ -25,7 +25,7 @@ public class Connexio {
     public List<Client> getPersonList() throws SQLException {
         try (
             Statement stmnt = con.createStatement();
-            ResultSet rs = stmnt.executeQuery("select client.*, client_colectiu.num_familiar,client_federat.num_federacio from client left join client_colectiu on client.dni_usuari = client_colectiu.dni_usuari left join client_federat on client.dni_usuari = client_federat.dni_usuari; ");
+            ResultSet rs = stmnt.executeQuery("select client.*, client_colectiu.num_familiar,client_federat.nivell from client left join client_colectiu on client.dni_usuari = client_colectiu.dni_usuari left join client_federat on client.dni_usuari = client_federat.dni_usuari; ");
         ){
             List<Client> personList = new ArrayList<>();
             while (rs.next()) {
@@ -34,7 +34,8 @@ public class Connexio {
                 String cognom = rs.getString("cognom");
                 String cognom2 = rs.getString("cognom2");
                 String familianum = rs.getString("num_familiar");
-                Client person = new Client(dni, nom, cognom, cognom2, familianum);
+                String nivell = rs.getString("nivell");
+                Client person = new Client(dni, nom, cognom, cognom2, familianum, nivell);
                 personList.add(person);
             }
             return personList ;

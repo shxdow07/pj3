@@ -10,13 +10,14 @@ public class Client {
     private String cognom;
     private String cognom2;
     private String familianum;
+    private String nivell;
 
     
     public Client(){
         idClient++;
     }
     
-    public Client (String dni, String nom, String cognom, String cognom2, String familianum){
+    public Client (String dni, String nom, String cognom, String cognom2, String familianum, String nivell){
         idClient++;
         
         this.idClient = idClient;
@@ -25,6 +26,7 @@ public class Client {
         this.cognom = cognom;
         this.cognom2 = cognom2;
         this.familianum = familianum;
+        this.nivell =  nivell;
 
     }
 
@@ -54,6 +56,16 @@ public class Client {
     public void setFamilianum(String familianum) {
         this.familianum = familianum;
     }
+
+    public String getNivell() {
+        return nivell;
+    }
+
+    public void setNivell(String nivell) {
+        this.nivell = nivell;
+    }
+    
+    
     
     
   
